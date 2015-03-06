@@ -14,7 +14,7 @@
 # Description:       Starts googleproxy using start-stop-daemon
 ### END INIT INFO
 
-# Change this path to wherever your google_auth_proxy bin resides:
+# Change this to wherever your google_auth_proxy bin resides:
 GPROXY_BIN=/opt/google_auth_proxy
 
 PID_FILE=/var/run/$NAME.pid
@@ -22,6 +22,9 @@ PATH=/bin:/usr/bin:/sbin:/usr/sbin:$GPROXY_BIN
 DAEMON=$GPROXY_BIN/google_auth_proxy
 NAME=gproxy
 DESC="gproxy"
+
+# Change this to wherever your config file lives
+GPROXY_CONFIG="-config=/etc/google_auth_proxy.cfg"
 
 if [ `id -u` -ne 0 ]; then
 	echo "You need root privileges to run this script"
@@ -46,7 +49,7 @@ case "$1" in
 	fi
 
 	# Start daemon
-	start-stop-daemon --start --pidfile "$PID_FILE" --make-pidfile --background --exec $DAEMON
+	start-stop-daemon --start --pidfile "$PID_FILE" --make-pidfile --background --exec $DAEMON -- $GPROXY_CONFIG
 	log_end_msg $?
 	;;
   stop)
