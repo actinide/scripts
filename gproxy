@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# /etc/init.d/googleproxy -- startup script for bitly's google_auth_proxy
+# /etc/init.d/gproxy -- startup script for bitly's google_auth_proxy
 # (https://github.com/bitly/google_auth_proxy)
 # Author: actinide@gmail.com 2015-03-06; used Kibana init script as template
 #
