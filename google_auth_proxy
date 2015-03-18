@@ -17,6 +17,7 @@
 # Do NOT "set -e"
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
+# IMPORTANT: The proxy will not run without a config file specified in DAEMON_ARGS!
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Google OAuth Proxy"
 NAME=google_auth_proxy
