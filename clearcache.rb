@@ -33,13 +33,13 @@ opts.each do |opt, arg|
         CloudFront distribution ID
 
         -p, --path:
-        Invalidation path (usually /*)
+        Invalidation path, enclosed in quotes (usually "/*")
 
     EOF
   when '--distid'
     cf_dist = arg
   when '--path'
-    cf_path = arg
+    cf_path = arg.tr(%q{"'}, '')
   end
 end
 
