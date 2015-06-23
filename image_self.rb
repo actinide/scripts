@@ -13,9 +13,6 @@ instance_id = Net::HTTP.get( URI.parse( metadata_endpoint + 'instance-id' ) )
 instance_region = Net::HTTP.get( URI.parse( metadata_endpoint + 'placement/availability-zone' ) )
 instance_region = instance_region[0...-1]
 
-puts instance_id
-puts instance_region
-
 # It's a little boxy thing, Norm. With switches on it? Lets my computer talk to the one there.
 client = Aws::EC2::Client.new(region: "#{instance_region}")
 
@@ -39,9 +36,8 @@ resp = client.describe_tags({
 })
 
 instance_name = resp.tags[0].value
-puts instance_name
 
-# And finally, image the instance
+# Image the instance
 resp = client.create_image({
   dry_run: true,
   instance_id: "#{instance_id}", # Required
@@ -49,3 +45,9 @@ resp = client.create_image({
   description: "Pre-patch backup of #{instance_name}",
   no_reboot: true,
 })
+
+image_id = resp.image_id
+
+# Tag the resulting image for future deletion
+ec2 = Aws::EC2.new(region: "#{instance_region}")
+ec2.tags.create(ec2.image["#{image_id}"], 'stat', 'pre-patch')
