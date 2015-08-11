@@ -17,7 +17,14 @@ region_list.regions.each do |region|
 
   # Get a list of instances running in each region
   ec2 = Aws::EC2::Client.new(region: "#{region_name}")
-  instance_list = ec2.describe_instances
+  instance_list = ec2.describe_instances(
+    filters: [
+      {
+        name: 'instance-state-name',
+        values: ['pending', 'running']
+      }
+    ]
+  )
 
   instance_list.reservations.each do |instance|
     instance_ip = instance.instances[0].public_ip_address
