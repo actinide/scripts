@@ -27,9 +27,11 @@ region_list.regions.each do |region|
   )
 
   instance_list.reservations.each do |instance|
-    instance_ip = instance.instances[0].public_ip_address
-    instance_tags = instance.instances[0].tags
-    puts instance_ip
-    puts instance_tags
+    instance.instances.each do |inst_attr|
+      instance_ip = inst_attr.public_ip_address
+      instance_tags = inst_attr.tags
+      puts instance_ip
+      puts instance_tags
+    end
   end
 end
