@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'aws-sdk'
 require 'rubygems'
@@ -21,17 +21,18 @@ region_list.regions.each do |region|
     filters: [
       {
         name: 'instance-state-name',
-        values: ['pending', 'running']
+        values: %w(pending running)
       }
     ]
   )
 
-  instance_list.reservations.each do |instance|
-    instance.instances.each do |inst_attr|
-      instance_ip = inst_attr.public_ip_address
-      instance_tags = inst_attr.tags
-      puts instance_ip
-      puts instance_tags
+file = File.open("inventory_#{time}", 'w')
+    instance_list.reservations.each do |instance|
+      instance.instances.each do |inst_attr|
+        instance_ip = inst_attr.public_ip_address
+        instance_tags = inst_attr.tags
+        file.puts instance_ip
+        file.puts instance_tags
+      end
     end
   end
-end
