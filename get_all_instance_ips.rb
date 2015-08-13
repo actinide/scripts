@@ -45,7 +45,6 @@ region_list.regions.each do |regions|
 end
 
 # Write the instance IPs and names to inventory files for later use
-
 inv_file.puts instance_ips
 inv_file.puts instance_names
 scan_file.puts instance_ips
