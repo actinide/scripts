@@ -25,7 +25,6 @@ resp_data.reservations.each do |res|
     inst.tags.each do |tag|
       tags[tag.key] = tag.value
 
-      name = tags['Name'] || 'noname'
       app = tags['app'] || 'noapp'
       type = tags['type'] || 'notype'
       env = tags['env'] || 'noenv'
