@@ -25,6 +25,7 @@ resp_data.reservations.each do |res|
     inst.tags.each do |tag|
       tags[tag.key] = tag.value
 
+      name = tags['Name'] || 'noname'
       app = tags['app'] || 'noapp'
       type = tags['type'] || 'notype'
       env = tags['env'] || 'noenv'
@@ -32,7 +33,7 @@ resp_data.reservations.each do |res|
     # Get the instance's private DNS name to use in the hostname
     priv_dns_name = inst.private_dns_name.chomp('.ec2.internal')
 
-    hostname = "#{app}-#{type}-#{env}-#{priv_dns_name}"
+    hostname = name || "#{app}-#{type}-#{env}-#{priv_dns_name}"
 
       # Use the hostname as the AWS instance name
       resp_sethostname = client.create_tags(
