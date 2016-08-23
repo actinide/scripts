@@ -1,6 +1,6 @@
 ### Sets up a new Mac with a bunch o' stuff
 
-echo "export PS1='$(whoami)@$(hostname):$(pwd)> $ '" >> ~/.bash_profile
+echo "export PS1='[\e[0;35m$(whoami)\e[m@\e[0;32m$(hostname)\e[m:$(pwd)]$ '" >> ~/.bash_profile
 
 # Install Homebrew
 if test ! $(which_brew); then
