@@ -1,5 +1,7 @@
 ### Sets up a new Mac with a bunch o' stuff
 
+echo "export PS1='$(whoami)@$(hostname):$(pwd)> $ '" >> ~/.bash_profile
+
 # Install Homebrew
 if test ! $(which_brew); then
   echo $BLUE'==>'$RESET "Installing Homebrew..."
