@@ -61,6 +61,18 @@ if test ! $(which_packer); then
   brew install packer
 fi
 
+# Install Vagrant
+if test ! $(which_vagrant); then
+  echo $BLUE '==>'$RESET "Installing Vagrant..."
+  brew cask install vagrant
+fi
+
+# Install VirtualBox
+if test ! $(which_virtualbox); then
+  echo $BLUE '==>'$RESET "Install VirtualBox"
+  brew cask install virtualbox
+fi
+
 # Install Ansible
 if test ! $(which_ansible); then
   echo $BLUE'==>'$RESET "Installing Ansible..."
